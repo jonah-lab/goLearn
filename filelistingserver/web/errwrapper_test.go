@@ -15,14 +15,14 @@ func errPanic(writer http.ResponseWriter, request *http.Request) error {
 
 func TestErrwrapper(t *testing.T) {
 	tests := []struct {
-		h       filter.appHandler
+		h       filter.AppHandler
 		code    int
 		message string
 	}{
 		{errPanic, 500, ""},
 	}
 	for _, tt := range tests {
-		f := filter.errWrapper(tt.h)
+		f := filter.ErrWrapper(tt.h)
 		response := httptest.NewRecorder()
 		request := httptest.NewRequest(http.MethodGet, "http://www.imooc.com", nil)
 		f(response, request)

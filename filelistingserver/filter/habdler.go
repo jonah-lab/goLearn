@@ -11,9 +11,9 @@ type userError interface {
 	Message() string
 }
 
-type appHandler func(writer http.ResponseWriter, request *http.Request) error
+type AppHandler func(writer http.ResponseWriter, request *http.Request) error
 
-func ErrWrapper(handler appHandler) func(writer http.ResponseWriter, request *http.Request) {
+func ErrWrapper(handler AppHandler) func(writer http.ResponseWriter, request *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		err := handler(writer, request)
 		defer func() {
